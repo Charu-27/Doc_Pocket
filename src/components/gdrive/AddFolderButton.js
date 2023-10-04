@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFolderPlus } from "@fortawesome/free-solid-svg-icons"
 import { database } from "../firebase"
 import { useAuth } from "../../Contexts/Authcontext"
-import ROOT_FOLDER  from "../hooks/useFolder"
+import {ROOT_FOLDER } from "../hooks/useFolder"
 
 
 
@@ -36,7 +36,7 @@ export default function AddFolderButton({ currentFolder }) {
       name: name,
       parentId: currentFolder.id,
       userId: currentUser.uid,
-      path: path,
+      path:path,
       createdAt: database.getCurrentTimestamp(),
     })
     setName("")

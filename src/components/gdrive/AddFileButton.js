@@ -4,7 +4,7 @@ import { faFileUpload } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useAuth } from "../../Contexts/Authcontext"
 import  {storage , database } from "../firebase"
-import  ROOT_FOLDER  from "../hooks/useFolder"
+import  {ROOT_FOLDER } from "../hooks/useFolder"
 import { v4 as uuidV4 } from "uuid"
 import { ProgressBar, Toast } from "react-bootstrap"
 

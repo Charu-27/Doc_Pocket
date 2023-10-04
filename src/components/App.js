@@ -19,7 +19,7 @@ function App() {
         <Route path="Signup" element={<Signup />}></Route>
         <Route path="Login" element={<Login />}></Route>
         <Route path="Dashboard" element={<Dashboard />}></Route>
-        <Route path="/folder/:folderid" element={<Dashboard />}></Route>
+        <Route path="/folder/:folderId" element={<Dashboard />}></Route>
         <Route path="ForgetPassword" element={<ForgetPassword/>}></Route>
       </Routes>
       </BrowserRouter>

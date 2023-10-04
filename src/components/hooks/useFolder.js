@@ -14,6 +14,7 @@ const ACTIONS = {
 
 export const ROOT_FOLDER = { name: "Root", id: null, path: [] }
 
+
 function reducer(state, { type, payload }) {
   switch (type) {
     case ACTIONS.SELECT_FOLDER:
@@ -92,6 +93,7 @@ export function useFolder(folderId = null, folder = null) {
           payload: { childFolders: snapshot.docs.map(database.formatDoc) },
         })
       })
+    
   }, [folderId, currentUser])
 
   useEffect(() => {
@@ -111,5 +113,4 @@ export function useFolder(folderId = null, folder = null) {
 
   return state
 }
-
-export default ROOT_FOLDER;
+//export default ROOT_FOLDER;
