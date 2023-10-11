@@ -32,35 +32,44 @@ function Signup()
 
   return(
     <>
-     <div className='container'>
-      <Container className="Signup">
-        <h2 className="header">Signup</h2>
+     <div className='body'>
+      <Container className="container">
+        <h1 className="header">Signup</h1>
         {error && <Alert variant="danger">{error}</Alert>}
+        <div className="form-container">
     <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
+       <div className="input-container">
+              <Form.Group  controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" ref={emailRef} required/>
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+</div>
+<div className="input-container">
+      <Form.Group controlId="formBasicPassword">
         <Form.Label>Password</Form.Label>
         <Form.Control type="password" placeholder="Password" ref={passwordRef} required/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
+      </div>
+      <div className="input-container">
+      <Form.Group controlId="formBasicPassword">
         <Form.Label> Confirm Password</Form.Label>
         <Form.Control type="password" placeholder="Confirm Password" ref={ConfirmpasswordRef} required/>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+      </div>
+      <Form.Group  controlId="formBasicCheckbox">
         <Form.Check type="checkbox" label="Check me out" />
       </Form.Group>
       <Button disabled={loading} variant="primary" type="submit">
         Submit
       </Button>
     </Form>
-    <a href="/Login">Back to Login</a>
+    </div>
+    <div className="links2">
+     <a href="/Login">Back to Login</a>
+     </div>
     </Container>
     </div>
     </>

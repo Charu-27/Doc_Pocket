@@ -1,0 +1,114 @@
+body{
+    justify-content: center;
+    margin:2rem;
+    
+    
+}
+.dashboard {
+    margin:0;
+    background-color: rgb(166, 170, 173);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 100%;
+    width:100%;
+    background-position: cover;
+}
+
+
+.header4 {
+    color: rgb(68, 63, 63);
+    text-align: left;
+    font-family: cursive;
+    font-size:2rem ;
+
+}
+.navbar {
+    display: flex;
+    background-color: #beb3b3;
+    padding-bottom: 0.8rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 3.7rem;
+
+
+}
+.files{
+    background-color: #ccc6c6;
+    border:dotted;
+    border-color: #6d6a6a;
+    border-radius: 4%;
+    padding: 1rem;
+    font-size: medium;
+
+
+}
+.navlink{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.filecontainer
+{   display: flex;
+    justify-content:left;
+    margin-left: 2rem;
+    justify-content: top;
+    flex-direction: row;
+}
+.foldercontainer
+{   display:flex;
+    justify-content:left;
+    margin-left: 2rem;
+    justify-content: top;
+   
+}
+
+.link4{
+    font-family: cursive;
+    color: rgb(59, 54, 54);
+}
+.link5{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: black;
+}
+.title{
+    font-size: 2rem;
+    color: aliceblue;
+    margin-left: 1rem;
+    font-family: cursive;
+}
+
+
+
+/* Style the main content area */
+.btn{
+    justify-content: space-around;
+    margin: 1rem;
+    width:15rem;
+    border-color: #ccc6c6;
+
+
+}
+.breadscrumb{
+   text-align: left;
+   font-family: 'Times New Roman', Times, serif;
+   font-size: medium;
+   font-color:black;
+
+}
+
+.widget {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin-right: 10px;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    .widget {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}

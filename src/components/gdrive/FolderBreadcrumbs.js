@@ -11,32 +11,33 @@ export default function FolderBreadcrumbs({ currentFolder }) {
 
   return (
     <Breadcrumb
-      className="flex-grow-1"
-      listProps={{ className: "bg-white pl-0 m-0" }}
+      listProps={{  className: "link5"}}
     >
       {path.map((folder, index) => (
-        <Breadcrumb.Item
+        <Breadcrumb.Item 
           key={folder.id}
-          linkAs={Link}
+          linkAs={Link} 
+          color="black" 
           linkProps={{
-            to: {
+            to: { 
               pathname: folder.id ? `/folder/${folder.id}` : "/",
               state: { folder: { ...folder, path: path.slice(1, index) } },
+              color:"black"
             },
-          }}
-          className="text-truncate d-inline-block"
-          style={{ maxWidth: "150px" }}
+          }} 
+          className="breadscrumb"
         >
-          {folder.name}
+         {folder.name}
         </Breadcrumb.Item>
       ))}
       {currentFolder && (
-        <Breadcrumb.Item
-          className="text-truncate d-inline-block"
-          style={{ maxWidth: "200px" }}
+        <Breadcrumb.Item 
           active
+          className="link5"
+          style={{ maxWidth: "200px" }}
+          
         >
-          {currentFolder.name}
+        {currentFolder.name}
         </Breadcrumb.Item>
       )}
     </Breadcrumb>

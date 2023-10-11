@@ -14,6 +14,7 @@ export default function AddFolderButton({ currentFolder }) {
   const { currentUser } = useAuth()
 
   function openModal() {
+  
     setOpen(true)
   }
 
@@ -45,14 +46,16 @@ export default function AddFolderButton({ currentFolder }) {
 
   return (
     <>
-      <Button onClick={openModal} variant="outline-success" size="sm">
+      <Button onClick={openModal} variant="outline-success" size="medium"
+      className="btn" color="green">
         <FontAwesomeIcon icon={faFolderPlus} />
+        Create New Folder
       </Button>
-      <Modal show={open} onHide={closeModal}>
+      <Modal show={open} onHide={closeModal} >
         <Form onSubmit={handleSubmit}>
           <Modal.Body>
             <Form.Group>
-              <Form.Label>Folder Name</Form.Label>
+              <Form.Label className="title">Folder Name</Form.Label>
               <Form.Control
                 type="text"
                 required
@@ -62,10 +65,10 @@ export default function AddFolderButton({ currentFolder }) {
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={closeModal}>
+            <Button variant="secondary" onClick={closeModal} >
               Close
             </Button>
-            <Button variant="success" type="submit">
+            <Button variant="success" type="submit" color="green">
               Add Folder
             </Button>
           </Modal.Footer>

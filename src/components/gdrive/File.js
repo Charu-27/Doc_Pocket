@@ -1,17 +1,21 @@
 import { faFile } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React from "react"
+import {Card} from "react-bootstrap"
+import "./Dashboard.css"
 
 export default function File({ file }) {
   return (
-    <a
+    <div className="filecontainer">
+    <a 
       href={file.url}
       target="_blank"
-      className="btn btn-outline-dark text-truncate w-100"
-    >
-      <FontAwesomeIcon icon={faFile} className="mr-2" />
-      {file.name}
+      className="link4"
+    ><Card className="files">
+      <FontAwesomeIcon icon={faFile}  />
+      {file.name} </Card>
     </a>
+   </div>
   )
 }
 

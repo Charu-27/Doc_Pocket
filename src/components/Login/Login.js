@@ -29,34 +29,45 @@ function Login()
 
   return(
     <>
-     <div className='container'>
-      <Container className="Signup">
-        <h2 className="header">Login</h2>
+      <div className="body">
+        <div className="image"></div>
+      <Container className="container1" >
+        <h1 className="heading1">Login</h1>
         {error && <Alert variant="danger">{error}</Alert>}
-    <Form onSubmit={handleSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
+     
+        <div className="form-container1">
+    <Form  onSubmit={handleSubmit}>
+      <div className="input-container">
+      <Form.Group  controlId="formBasicEmail">
+        <Form.Label id="input-text">Email address</Form.Label>
         <Form.Control type="email" placeholder="Enter email" ref={emailRef} required/>
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
       </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
+      </div>
+<div className="input-container">
+      <Form.Group  controlId="formBasicPassword">
+        <Form.Label id="input-text">Password</Form.Label>
         <Form.Control type="password" placeholder="Password" ref={passwordRef} required/>
       </Form.Group>
+      </div>
       
       <Button disabled={loading} variant="primary" type="submit">
         Submit
       </Button>
-      <div>
+         </Form>
+      <br></br>
+      <br></br>
+      <div className="links1">
         <a href="ForgetPassword">Forget Password </a>
         <a href="Signup">Back to Signup </a>
       </div>
-    </Form>
+ 
+    </div>
     </Container>
     </div>
+    
     </>
 )
 

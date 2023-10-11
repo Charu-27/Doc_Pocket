@@ -7,6 +7,7 @@ import File from "./File"
 import FolderBreadcrumbs from "./FolderBreadcrumbs"
 import  {useFolder}  from "../hooks/useFolder"
 import { useParams} from "react-router-dom"
+import "./Dashboard.css"
 
 
 
@@ -18,42 +19,49 @@ export default function Dashboard() {
    
   return (
     <>
-      <Navbar />
-      <Container fluid>
+    <div className="dashboard">
+      <div >
+      <Navbar className="navbar" >
+      <h1 className="header4">Dashboard
+     
+        <a className="navlink "  href="/">Logout</a>
+        <a  className="navlink " href="Signup">Create new account</a> </h1>
+        </Navbar></div>
+      <Container fluid className="container4">
         <div>
         <FolderBreadcrumbs currentFolder={folder}/>
          <AddFileButton currentFolder={folder} />
           <AddFolderButton currentFolder={folder} />
           </div>
           {childFolders.length > 0 && (
-          <div className="d-flex flex-wrap">
+          <div className="navlink">
             {childFolders.map(childFolder => (
               <div
                 key={childFolder.id}
                 style={{ maxWidth: "250px" }}
-                className="p-2"
+                className="navlink"
               >
-                <Folder folder={childFolder} />
+                <Folder className="navlink" folder={childFolder} />
               </div>
             ))}
           </div>
         )}
         {childFolders.length > 0 && childFiles.length > 0 && <hr />}
         {childFiles.length > 0 && (
-          <div className="d-flex flex-wrap">
+          <div className="navlink">
             {childFiles.map(childFile => (
               <div
                 key={childFile.id}
                 style={{ maxWidth: "250px" }}
                 className="p-2"
               >
-                <File file={childFile} />
+                <File className="navlink" file={childFile} />
               </div>
             ))}
           </div>
         )}
           
-      </Container>
+      </Container></div>
     </>
   )
 }
