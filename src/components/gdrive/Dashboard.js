@@ -25,7 +25,7 @@ export default function Dashboard() {
       <h1 className="header4">Dashboard
      
         <a className="navlink "  href="/">Logout</a>
-        <a  className="navlink " href="Signup">Create new account</a> </h1>
+        <a  className="navlink " href="Signup">Signup</a> </h1>
         </Navbar></div>
       <Container fluid className="container4">
         <div>

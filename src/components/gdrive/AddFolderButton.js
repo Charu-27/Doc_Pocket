@@ -14,8 +14,8 @@ export default function AddFolderButton({ currentFolder }) {
   const { currentUser } = useAuth()
 
   function openModal() {
-  
-    setOpen(true)
+     setOpen(true)
+   
   }
 
   function closeModal() {

@@ -40,6 +40,9 @@
 .link-container{
     justify-content: space-between;
     margin-top:3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .a1{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -67,7 +70,15 @@
     display: none;
 }
 
-/* Remove the splash screen when the main content is visible */
+
 .main-content ~ .splash-screen {
     display: none;
+}
+
+@media screen and (max-device-width: 600px) 
+{
+.link-container{
+    display:flex;
+    flex-direction: column;
+}
 }
