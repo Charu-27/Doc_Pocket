@@ -92,12 +92,14 @@ export default function AddFileButton({ currentFolder }) {
     <>
     
       <Button className="btn" size="medium">
+    <label>
         <FontAwesomeIcon icon={faFileUpload} />
         <input
           type="file"
           onChange={handleUpload}
           style={{ opacity: 0, position: "absolute", left: "-9999px" }}
-        />Add new File</Button>
+        /></label>
+          Add new File</Button>
      
       {uploadingFiles.length > 0 &&
         ReactDOM.createPortal(
