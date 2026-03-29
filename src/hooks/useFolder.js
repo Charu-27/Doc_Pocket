@@ -1,9 +1,6 @@
-
-   
 import { useReducer, useEffect } from "react"
-import { useAuth } from "../../Contexts/Authcontext"
-import { database } from "../firebase"
-
+import { useAuth } from "../context/AuthContext"
+import { database } from "../config/firebase"
 
 const ACTIONS = {
   SELECT_FOLDER: "select-folder",
@@ -13,7 +10,6 @@ const ACTIONS = {
 }
 
 export const ROOT_FOLDER = { name: "Root", id: null, path: [] }
-
 
 function reducer(state, { type, payload }) {
   switch (type) {
@@ -25,20 +21,11 @@ function reducer(state, { type, payload }) {
         childFolders: [],
       }
     case ACTIONS.UPDATE_FOLDER:
-      return {
-        ...state,
-        folder: payload.folder,
-      }
+      return { ...state, folder: payload.folder }
     case ACTIONS.SET_CHILD_FOLDERS:
-      return {
-        ...state,
-        childFolders: payload.childFolders,
-      }
+      return { ...state, childFolders: payload.childFolders }
     case ACTIONS.SET_CHILD_FILES:
-      return {
-        ...state,
-        childFiles: payload.childFiles,
-      }
+      return { ...state, childFiles: payload.childFiles }
     default:
       return state
   }
@@ -59,10 +46,11 @@ export function useFolder(folderId = null, folder = null) {
 
   useEffect(() => {
     if (folderId == null) {
-      return dispatch({
+      dispatch({
         type: ACTIONS.UPDATE_FOLDER,
         payload: { folder: ROOT_FOLDER },
       })
+      return
     }
 
     database.folders
@@ -83,6 +71,8 @@ export function useFolder(folderId = null, folder = null) {
   }, [folderId])
 
   useEffect(() => {
+    if (!currentUser?.uid) return undefined
+
     return database.folders
       .where("parentId", "==", folderId)
       .where("userId", "==", currentUser.uid)
@@ -93,24 +83,21 @@ export function useFolder(folderId = null, folder = null) {
           payload: { childFolders: snapshot.docs.map(database.formatDoc) },
         })
       })
-    
   }, [folderId, currentUser])
 
   useEffect(() => {
-    return (
-      database.files
-        .where("folderId", "==", folderId)
-        .where("userId", "==", currentUser.uid)
-        // .orderBy("createdAt")
-        .onSnapshot(snapshot => {
-          dispatch({
-            type: ACTIONS.SET_CHILD_FILES,
-            payload: { childFiles: snapshot.docs.map(database.formatDoc) },
-          })
+    if (!currentUser?.uid) return undefined
+
+    return database.files
+      .where("folderId", "==", folderId)
+      .where("userId", "==", currentUser.uid)
+      .onSnapshot(snapshot => {
+        dispatch({
+          type: ACTIONS.SET_CHILD_FILES,
+          payload: { childFiles: snapshot.docs.map(database.formatDoc) },
         })
-    )
+      })
   }, [folderId, currentUser])
 
   return state
 }
-//export default ROOT_FOLDER;

@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+# Doc Pocket
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Doc Pocket is a small web app for keeping documents organized: you can create folders, move through them with breadcrumbs, and upload files that are stored in Firebase. You sign in with email and password.
 
-## Available Scripts
+## Tools and technologies
 
-In the project directory, you can run:
+| Area | What we use |
+| ---- | ----------- |
+| Interface | [React](https://react.dev/) 18 |
+| UI building blocks | [React Bootstrap](https://react-bootstrap.github.io/) and [Bootstrap](https://getbootstrap.com/) 5 |
+| Forms | [React Hook Form](https://react-hook-form.com/) is in the bundle; the auth screens use simple controlled fields |
+| Routing | [React Router](https://reactrouter.com/) 6 |
+| Icons | [Font Awesome](https://fontawesome.com/) (React package) |
+| Authentication, database, file storage | [Firebase](https://firebase.google.com/) (Auth, Firestore, Storage) |
+| IDs for uploads | [uuid](https://www.npmjs.com/package/uuid) |
+| Build and local server | [Create React App](https://create-react-app.dev/) (`react-scripts`) |
 
-### `npm start`
+## How the project is laid out
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+src/
+  App.js                 — routes and auth layout
+  index.js               — entry, global CSS
+  index.css              — theme variables and shared styles
+  config/
+    firebase.js          — Firebase setup (reads env variables)
+  context/
+    AuthContext.js       — sign-in state and auth helpers
+  hooks/
+    useFolder.js         — current folder, child folders, and files from Firestore
+  pages/
+    SplashScreen.js      — landing
+    Login.js, Signup.js, ForgotPassword.js
+    auth.css             — shared auth page styles
+  components/
+    PrivateRoute.js      — sends guests to sign-in for `/dashboard` and `/folder/:id`
+    drive/
+      Dashboard.js       — main library screen
+      Folder.js, File.js, FolderBreadcrumbs.js
+      AddFolderButton.js, AddFileButton.js
+      Dashboard.css      — drive layout and cards
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Run it locally
 
-### `npm test`
+1. Install [Node.js](https://nodejs.org/) (LTS is fine).
+2. In this folder, install dependencies:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+   ```bash
+   npm install
+   ```
 
-### `npm run build`
+3. Firebase expects variables in a `.env` file at the project root (same folder as `package.json`). Copy the example and fill in values from the Firebase console (**Project settings → Your apps**):
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+   ```bash
+   cp .env.example .env
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Start the app:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+   ```bash
+   npm start
+   ```
 
-### `npm run eject`
+   It opens at [http://localhost:3000](http://localhost:3000).
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Build for deployment
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run build
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Static output is in the `build` folder. Deploy that folder to any static host; set the same `REACT_APP_*` variables in your hosting provider’s environment if you build in the cloud.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Firebase notes
 
-## Learn More
+Firestore needs rules that restrict `folders` and `files` to the signed-in user (for example matching `userId` to `request.auth.uid`). Storage rules should scope uploads under each user’s path. Configure those in the Firebase console.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The `.env` file is listed in `.gitignore` so keys are not committed. Use `.env.example` as the checklist of required variable names.

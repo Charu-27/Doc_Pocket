@@ -1,24 +1,19 @@
 import { faFile } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import React from "react"
-import {Card} from "react-bootstrap"
 import "./Dashboard.css"
 
 export default function File({ file }) {
   return (
-    <div className="filecontainer">
-    <a 
+    <a
       href={file.url}
       target="_blank"
-      className="link4"
-    ><Card className="files">
-      <FontAwesomeIcon icon={faFile}  />
-      {file.name} </Card>
+      rel="noopener noreferrer"
+      className="drive-file-link drive-card-btn"
+    >
+      <div className="drive-card-icon">
+        <FontAwesomeIcon icon={faFile} />
+      </div>
+      <div className="drive-card-label">{file.name}</div>
     </a>
-   </div>
   )
 }
-
- 
-     
- 

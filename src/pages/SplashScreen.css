@@ -1,0 +1,95 @@
+.splash-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  background: radial-gradient(ellipse 100% 70% at 50% -30%, #1e4a7b 0%, transparent 55%),
+    linear-gradient(180deg, #0a0e14 0%, #0f1419 40%, #151d2a 100%);
+}
+
+.splash-inner {
+  max-width: 520px;
+  text-align: center;
+  animation: splash-in 0.8s ease-out;
+}
+
+@keyframes splash-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.splash-title {
+  margin: 0 0 1rem;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--dp-text);
+  line-height: 1.2;
+}
+
+.splash-lead {
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+  color: var(--dp-muted);
+  line-height: 1.6;
+}
+
+.splash-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+@media (min-width: 480px) {
+  .splash-actions {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.splash-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.splash-btn:hover {
+  transform: translateY(-1px);
+  text-decoration: none;
+}
+
+.splash-btn-primary {
+  background: var(--dp-accent);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+}
+
+.splash-btn-primary:hover {
+  color: #fff;
+  background: var(--dp-accent-hover);
+}
+
+.splash-btn-secondary {
+  background: transparent;
+  color: var(--dp-text);
+  border: 1px solid var(--dp-border);
+}
+
+.splash-btn-secondary:hover {
+  color: var(--dp-text);
+  border-color: var(--dp-muted);
+  background: var(--dp-surface);
+}
