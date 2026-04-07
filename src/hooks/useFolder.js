@@ -62,7 +62,8 @@ export function useFolder(folderId = null, folder = null) {
           payload: { folder: database.formatDoc(doc) },
         })
       })
-      .catch(() => {
+      .catch(err => {
+        console.error("Failed to load folder:", err)
         dispatch({
           type: ACTIONS.UPDATE_FOLDER,
           payload: { folder: ROOT_FOLDER },
@@ -77,12 +78,36 @@ export function useFolder(folderId = null, folder = null) {
       .where("parentId", "==", folderId)
       .where("userId", "==", currentUser.uid)
       .orderBy("createdAt")
-      .onSnapshot(snapshot => {
-        dispatch({
-          type: ACTIONS.SET_CHILD_FOLDERS,
-          payload: { childFolders: snapshot.docs.map(database.formatDoc) },
-        })
-      })
+      .onSnapshot(
+        snapshot => {
+          dispatch({
+            type: ACTIONS.SET_CHILD_FOLDERS,
+            payload: { childFolders: snapshot.docs.map(database.formatDoc) },
+          })
+        },
+        err => {
+          console.error(
+            "Folders query failed (you may need a composite index):",
+            err
+          )
+          database.folders
+            .where("parentId", "==", folderId)
+            .where("userId", "==", currentUser.uid)
+            .onSnapshot(
+              snapshot => {
+                dispatch({
+                  type: ACTIONS.SET_CHILD_FOLDERS,
+                  payload: {
+                    childFolders: snapshot.docs.map(database.formatDoc),
+                  },
+                })
+              },
+              fallbackErr => {
+                console.error("Folders fallback query also failed:", fallbackErr)
+              }
+            )
+        }
+      )
   }, [folderId, currentUser])
 
   useEffect(() => {
@@ -91,12 +116,20 @@ export function useFolder(folderId = null, folder = null) {
     return database.files
       .where("folderId", "==", folderId)
       .where("userId", "==", currentUser.uid)
-      .onSnapshot(snapshot => {
-        dispatch({
-          type: ACTIONS.SET_CHILD_FILES,
-          payload: { childFiles: snapshot.docs.map(database.formatDoc) },
-        })
-      })
+      .onSnapshot(
+        snapshot => {
+          dispatch({
+            type: ACTIONS.SET_CHILD_FILES,
+            payload: { childFiles: snapshot.docs.map(database.formatDoc) },
+          })
+        },
+        err => {
+          console.error(
+            "Files query failed (you may need a composite index):",
+            err
+          )
+        }
+      )
   }, [folderId, currentUser])
 
   return state
